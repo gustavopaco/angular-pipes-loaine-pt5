@@ -1,0 +1,60 @@
+<div class="mb-3">
+  <!--IMPORTANT: Aplicando Filtros em tipos de variaveis (Format) - text,number,currency,Date,json...-->
+  <h2 class="text-center">Formatacao de variaveis usando Pipe '|'</h2>
+  <p>Titulo: {{ livro.titulo | uppercase | lowercase | camelCase }}</p>
+  <p>Rating: {{ livro.rating | number: '2.1-1' }}</p>
+  <p>Paginas: {{ livro.numeroPaginas | number }}</p>
+  <p>Preco: {{ livro.preco | currency:'BRL' }}</p>
+  <p>Preco: {{ livro.preco | currency:'BRL':true }}</p>
+  <p>Lancamento: {{ livro.dataLancamento | date: 'dd/MM/yyyy'}}</p>
+  <p>Url: {{ livro.url }}</p>
+  <br>
+  <p>Livro: {{ livro | json }}</p>
+</div>
+<div class="mb-3">
+  <h2 class="text-center">Pipe puro (*Nao recomendavel | Nao atualiza valor)</h2>
+  <div class="mb-3">
+    <input type="text" [(ngModel)]="filtro">
+  </div>
+  <div class="mb-3">
+    <button class="btn btn-primary" (click)="addNovoCurso()">Novo Curso</button>
+  </div>
+  <ul>
+    <li *ngFor="let item of livros | filtroArray:filtro">
+      {{ item }}
+    </li>
+  </ul>
+  <div class="mb-3">
+    <h2 class="text-center">Pipe Impuro (*Nao recomendavel | Atualiza valor) </h2>
+    <div class="mb-3">
+      <input type="text" [(ngModel)]="filtro">
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-danger" (click)="addNovoCurso()">Novo Curso</button>
+    </div>
+    <ul>
+      <li *ngFor="let item of livros | filtroArrayImpuro:filtro">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+  <div class="mb-3">
+    <h2 class="text-center">Maneira correta filtragem com Pipe </h2>
+    <div class="mb-3">
+      <input type="text" [(ngModel)]="filtro">
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-success" (click)="addNovoCurso()">Novo Curso</button>
+    </div>
+    <ul>
+      <li *ngFor="let item of obterCursos()">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+  <div class="mb-3">
+    <h2 class="text-center">Pipe Async</h2>
+    <p>{{ valorAsync | async}}</p>
+<!--    <p>{{ valorAsync2 | async}}</p>-->
+  </div>
+</div>
